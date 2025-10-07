@@ -10,7 +10,18 @@ import {
   Settings,
   LogOut,
   Building2,
-  Menu
+  Menu,
+  ChevronDown,
+  ChevronRight,
+  TrendingUp,
+  PieChart,
+  FileBarChart,
+  Download,
+  Upload,
+  Clock,
+  CheckCircle,
+  DollarSign,
+  Receipt
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -23,6 +34,17 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+interface MenuItem {
+  id: string;
+  label: string;
+  icon: any;
+  submenu?: {
+    id: string;
+    label: string;
+    icon: any;
+  }[];
+}
+
 interface LayoutProps {
   children: React.ReactNode;
   currentPage: string;
@@ -32,15 +54,62 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) => {
   const { user, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
+  const [expandedMenus, setExpandedMenus] = React.useState<string[]>(['reports']);
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'accounts', label: 'Contas', icon: Wallet },
     { id: 'transactions', label: 'Transações', icon: ArrowLeftRight },
-    { id: 'invoices', label: 'Notas Fiscais', icon: FileText },
-    { id: 'payments', label: 'Pagamentos', icon: CreditCard },
-    { id: 'reports', label: 'Relatórios', icon: BarChart3 },
+    { 
+      id: 'invoices', 
+      label: 'Notas Fiscais', 
+      icon: FileText,
+      submenu: [
+        { id: 'invoices-received', label: 'Recebidas', icon: Download },
+        { id: 'invoices-issued', label: 'Emitidas', icon: Upload },
+        { id: 'invoices-pending', label: 'Pendentes', icon: Clock },
+      ]
+    },
+    { 
+      id: 'payments', 
+      label: 'Pagamentos', 
+      icon: CreditCard,
+      submenu: [
+        { id: 'payments-scheduled', label: 'Agendados', icon: Clock },
+        { id: 'payments-completed', label: 'Concluídos', icon: CheckCircle },
+        { id: 'payments-new', label: 'Novo Pagamento', icon: DollarSign },
+      ]
+    },
+    { 
+      id: 'reports', 
+      label: 'Relatórios', 
+      icon: BarChart3,
+      submenu: [
+        { id: 'reports-financial', label: 'Financeiro', icon: TrendingUp },
+        { id: 'reports-analytics', label: 'Análises', icon: PieChart },
+        { id: 'reports-tax', label: 'Fiscal', icon: Receipt },
+        { id: 'reports-custom', label: 'Personalizados', icon: FileBarChart },
+      ]
+    },
   ];
+
+  const toggleMenu = (menuId: string) => {
+    setExpandedMenus(prev => 
+      prev.includes(menuId) 
+        ? prev.filter(id => id !== menuId)
+        : [...prev, menuId]
+    );
+  };
+
+  const isMenuExpanded = (menuId: string) => expandedMenus.includes(menuId);
+
+  const isParentActive = (item: MenuItem) => {
+    if (currentPage === item.id) return true;
+    if (item.submenu) {
+      return item.submenu.some(sub => currentPage === sub.id);
+    }
+    return false;
+  };
 
   const getInitials = (name: string) => {
     return name
@@ -113,32 +182,81 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
             fixed lg:static lg:translate-x-0
             w-64 bg-white shadow-lg h-[calc(100vh-64px)]
             transition-transform duration-300 ease-in-out z-40
+            overflow-y-auto
           `}
         >
-          <nav className="p-4 space-y-2">
+          <nav className="p-4 space-y-1">
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = currentPage === item.id;
+              const isActive = isParentActive(item);
+              const hasSubmenu = item.submenu && item.submenu.length > 0;
+              const isExpanded = isMenuExpanded(item.id);
               
               return (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    onNavigate(item.id);
-                    if (window.innerWidth < 1024) setSidebarOpen(false);
-                  }}
-                  className={`
-                    w-full flex items-center gap-3 px-4 py-3 rounded-lg
-                    transition-all duration-200
-                    ${isActive
-                      ? 'bg-blue-900 text-white shadow-md'
-                      : 'text-gray-700 hover:bg-gray-100'
-                    }
-                  `}
-                >
-                  <Icon className="h-5 w-5" />
-                  <span className="font-medium">{item.label}</span>
-                </button>
+                <div key={item.id}>
+                  {/* Menu Principal */}
+                  <button
+                    onClick={() => {
+                      if (hasSubmenu) {
+                        toggleMenu(item.id);
+                      } else {
+                        onNavigate(item.id);
+                        if (window.innerWidth < 1024) setSidebarOpen(false);
+                      }
+                    }}
+                    className={`
+                      w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg
+                      transition-all duration-200
+                      ${isActive
+                        ? 'bg-blue-900 text-white shadow-md'
+                        : 'text-gray-700 hover:bg-gray-100'
+                      }
+                    `}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon className="h-5 w-5" />
+                      <span className="font-medium">{item.label}</span>
+                    </div>
+                    {hasSubmenu && (
+                      isExpanded ? (
+                        <ChevronDown className={`h-4 w-4 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                      ) : (
+                        <ChevronRight className={`h-4 w-4 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                      )
+                    )}
+                  </button>
+
+                  {/* Submenu */}
+                  {hasSubmenu && isExpanded && (
+                    <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-200 pl-2">
+                      {item.submenu!.map((subItem) => {
+                        const SubIcon = subItem.icon;
+                        const isSubActive = currentPage === subItem.id;
+                        
+                        return (
+                          <button
+                            key={subItem.id}
+                            onClick={() => {
+                              onNavigate(subItem.id);
+                              if (window.innerWidth < 1024) setSidebarOpen(false);
+                            }}
+                            className={`
+                              w-full flex items-center gap-3 px-4 py-2 rounded-lg
+                              transition-all duration-200 text-sm
+                              ${isSubActive
+                                ? 'bg-blue-900 text-white shadow-md'
+                                : 'text-gray-600 hover:bg-gray-100'
+                              }
+                            `}
+                          >
+                            <SubIcon className="h-4 w-4" />
+                            <span className="font-medium">{subItem.label}</span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
               );
             })}
           </nav>
