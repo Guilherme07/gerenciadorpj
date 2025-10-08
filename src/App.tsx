@@ -64,19 +64,6 @@ function AppContent() {
     return <Login />;
   }
 
-  // Mostrar seletor de perfil se autenticado mas sem perfil selecionado
-  if (isAuthenticated && !selectedProfile) {
-    return <ProfileSelector onSelectProfile={(profileId) => {
-      selectProfile(profileId);
-      // Definir nome do perfil globalmente para exibição
-      const profileNames: Record<string, string> = {
-        'geral': 'Geral',
-        'filial-sul': 'Filial Sul'
-      };
-      (window as any).currentProfileName = profileNames[profileId] || profileId;
-    }} />;
-  }
-
   // Definir nome do perfil ao carregar se já estiver selecionado
   useEffect(() => {
     if (selectedProfile) {
@@ -88,7 +75,24 @@ function AppContent() {
     }
   }, [selectedProfile]);
 
+  const handleProfileSelect = (profileId: string) => {
+    selectProfile(profileId);
+    // Definir nome do perfil globalmente para exibição
+    const profileNames: Record<string, string> = {
+      'geral': 'Geral',
+      'filial-sul': 'Filial Sul'
+    };
+    (window as any).currentProfileName = profileNames[profileId] || profileId;
+    // Navegar para dashboard após selecionar perfil
+    setCurrentPage('dashboard');
+  };
+
   const renderPage = () => {
+    // Mostrar seletor de perfil se autenticado mas sem perfil selecionado
+    if (!selectedProfile) {
+      return <ProfileSelector onSelectProfile={handleProfileSelect} />;
+    }
+    
     switch (currentPage) {
       case 'dashboard':
         return <Dashboard />;
