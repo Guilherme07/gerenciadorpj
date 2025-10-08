@@ -154,12 +154,22 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
                 <div className="text-left hidden md:block">
                   <p className="text-sm font-medium">{user?.name}</p>
                   <p className="text-xs text-blue-200">{user?.company}</p>
+                  <p className="text-xs text-green-300 font-medium">
+                    {(window as any).currentProfileName || 'Perfil não selecionado'}
+                  </p>
                 </div>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>Minha Conta</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={() => {
+                localStorage.removeItem('selected_profile');
+                window.location.reload();
+              }}>
+                <Building2 className="mr-2 h-4 w-4" />
+                Trocar Perfil
+              </DropdownMenuItem>
               <DropdownMenuItem onClick={() => onNavigate('settings')}>
                 <Settings className="mr-2 h-4 w-4" />
                 Configurações

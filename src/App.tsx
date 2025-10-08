@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { Login } from '@/components/Login';
 import { Landing } from '@/pages/Landing';
+import { ProfileSelector } from '@/components/ProfileSelector';
 import { Layout } from '@/components/Layout';
 import { Dashboard } from '@/pages/Dashboard';
 import { Accounts } from '@/pages/Accounts';
@@ -10,7 +11,7 @@ import { ReportsFinancial } from '@/pages/ReportsFinancial';
 import './App.css';
 
 function AppContent() {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { isAuthenticated, isLoading, selectedProfile, selectProfile } = useAuth();
   const [currentPage, setCurrentPage] = useState('landing');
   const [showLogin, setShowLogin] = useState(false);
 
@@ -62,6 +63,30 @@ function AppContent() {
   if (!isAuthenticated) {
     return <Login />;
   }
+
+  // Mostrar seletor de perfil se autenticado mas sem perfil selecionado
+  if (isAuthenticated && !selectedProfile) {
+    return <ProfileSelector onSelectProfile={(profileId) => {
+      selectProfile(profileId);
+      // Definir nome do perfil globalmente para exibição
+      const profileNames: Record<string, string> = {
+        'geral': 'Geral',
+        'filial-sul': 'Filial Sul'
+      };
+      (window as any).currentProfileName = profileNames[profileId] || profileId;
+    }} />;
+  }
+
+  // Definir nome do perfil ao carregar se já estiver selecionado
+  useEffect(() => {
+    if (selectedProfile) {
+      const profileNames: Record<string, string> = {
+        'geral': 'Geral',
+        'filial-sul': 'Filial Sul'
+      };
+      (window as any).currentProfileName = profileNames[selectedProfile] || selectedProfile;
+    }
+  }, [selectedProfile]);
 
   const renderPage = () => {
     switch (currentPage) {
