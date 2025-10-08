@@ -81,7 +81,7 @@ export const Landing: React.FC = () => {
             onClick={navigateToLogin}
             className="bg-orange-500 hover:bg-orange-600 text-white"
           >
-            Acessar Conta
+            Acessar Gerenciador
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
@@ -103,7 +103,7 @@ export const Landing: React.FC = () => {
                 onClick={() => navigateToLogin()}
                 className="bg-orange-500 hover:bg-orange-600 text-white text-lg h-14 px-8"
               >
-                Entrar no Sistema
+                Acessar Gerenciador
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
