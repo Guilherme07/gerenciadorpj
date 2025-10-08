@@ -15,6 +15,15 @@ function AppContent() {
   const [currentPage, setCurrentPage] = useState('landing');
   const [showLogin, setShowLogin] = useState(false);
 
+  // Função para navegar para login
+  const navigateToLogin = () => {
+    window.history.pushState({}, '', '/login');
+    setShowLogin(true);
+    setCurrentPage('login');
+  };
+
+  // TODOS OS useEffect DEVEM ESTAR ANTES DE QUALQUER RETURN CONDICIONAL
+  
   // Detecta navegação para /login
   useEffect(() => {
     const handleNavigation = () => {
@@ -32,17 +41,23 @@ function AppContent() {
     return () => window.removeEventListener('popstate', handleNavigation);
   }, []);
 
-  // Função para navegar para login
-  const navigateToLogin = () => {
-    window.history.pushState({}, '', '/login');
-    setShowLogin(true);
-    setCurrentPage('login');
-  };
-
   // Expor função globalmente para Landing page
   useEffect(() => {
     (window as any).navigateToLogin = navigateToLogin;
   }, []);
+
+  // Definir nome do perfil ao carregar se já estiver selecionado
+  useEffect(() => {
+    if (selectedProfile) {
+      const profileNames: Record<string, string> = {
+        'geral': 'Geral',
+        'filial-sul': 'Filial Sul'
+      };
+      (window as any).currentProfileName = profileNames[selectedProfile] || selectedProfile;
+    }
+  }, [selectedProfile]);
+
+  // AGORA SIM PODEMOS TER RETURNS CONDICIONAIS
 
   if (isLoading) {
     return (
@@ -63,17 +78,6 @@ function AppContent() {
   if (!isAuthenticated) {
     return <Login />;
   }
-
-  // Definir nome do perfil ao carregar se já estiver selecionado
-  useEffect(() => {
-    if (selectedProfile) {
-      const profileNames: Record<string, string> = {
-        'geral': 'Geral',
-        'filial-sul': 'Filial Sul'
-      };
-      (window as any).currentProfileName = profileNames[selectedProfile] || selectedProfile;
-    }
-  }, [selectedProfile]);
 
   const handleProfileSelect = (profileId: string) => {
     selectProfile(profileId);
