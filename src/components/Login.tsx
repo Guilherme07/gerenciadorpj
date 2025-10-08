@@ -4,11 +4,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Fingerprint, Chrome, Building2, Shield, KeyRound } from 'lucide-react';
+import { Fingerprint, KeyRound, UserPlus } from 'lucide-react';
 
 export const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -31,15 +30,40 @@ export const Login: React.FC = () => {
     }
   };
 
+  const formatCPF = (value: string) => {
+    // Remove tudo que não é dígito
+    const numbers = value.replace(/\D/g, '');
+    
+    // Aplica a máscara de CPF: 000.000.000-00
+    if (numbers.length <= 11) {
+      return numbers
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d)/, '$1.$2')
+        .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    }
+    
+    return numbers.slice(0, 11)
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+  };
+
+  const handleCPFChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCPF(e.target.value);
+    setCpf(formatted);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      await login(email, password);
+      // Remove formatação do CPF antes de enviar
+      const cleanCPF = cpf.replace(/\D/g, '');
+      await login(cleanCPF, password);
     } catch (err) {
-      setError('Credenciais inválidas. Tente novamente.');
+      setError('CPF ou senha inválidos. Tente novamente.');
     } finally {
       setIsLoading(false);
     }
@@ -63,21 +87,9 @@ export const Login: React.FC = () => {
     }
   };
 
-  const handleSSOLogin = async (provider: string) => {
-    setError('');
-    setIsLoading(true);
-
-    try {
-      // Simulação de SSO
-      // Em produção, isso redirecionaria para o provedor OAuth
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      await login(`${provider}@sso.com`, 'sso');
-    } catch (err) {
-      setError(`Falha na autenticação via ${provider}. Tente novamente.`);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleOpenAccount = () => {
+    // Em produção, isso redirecionaria para a página de abertura de conta
+    alert('Redirecionando para abertura de conta PJ...\n\nEm produção, isso abriria o formulário de cadastro de nova empresa.');
   };
 
   return (
@@ -117,65 +129,17 @@ export const Login: React.FC = () => {
               </div>
             )}
 
-            {/* SSO Options */}
-            <div className="space-y-3">
-              <div className="text-sm font-medium text-gray-700 text-center">
-                Autenticação Corporativa (SSO)
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 border-2"
-                  onClick={() => handleSSOLogin('Google')}
-                  disabled={isLoading}
-                >
-                  <Chrome className="mr-2 h-4 w-4" />
-                  Google
-                </Button>
-
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 border-2"
-                  onClick={() => handleSSOLogin('Microsoft')}
-                  disabled={isLoading}
-                >
-                  <Building2 className="mr-2 h-4 w-4" />
-                  Microsoft
-                </Button>
-              </div>
-
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full h-12 border-2"
-                onClick={() => handleSSOLogin('CAIXA SSO')}
-                disabled={isLoading}
-              >
-                <Shield className="mr-2 h-5 w-5" />
-                Portal CAIXA Empresas
-              </Button>
-            </div>
-
-            <div className="relative">
-              <Separator />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="bg-white px-2 text-xs text-gray-500">ou</span>
-              </div>
-            </div>
-
             {/* Login Tradicional */}
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">E-mail</Label>
+                <Label htmlFor="cpf">CPF</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="seu@email.com.br"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="cpf"
+                  type="text"
+                  placeholder="000.000.000-00"
+                  value={cpf}
+                  onChange={handleCPFChange}
+                  maxLength={14}
                   required
                   disabled={isLoading}
                 />
@@ -215,12 +179,22 @@ export const Login: React.FC = () => {
                 disabled={isLoading}
               >
                 <KeyRound className="mr-2 h-4 w-4" />
-                {isLoading ? 'Entrando...' : 'Entrar com E-mail e Senha'}
+                {isLoading ? 'Entrando...' : 'Entrar'}
+              </Button>
+
+              <Button
+                type="button"
+                className="w-full h-12 bg-orange-500 hover:bg-orange-600 text-white"
+                onClick={handleOpenAccount}
+                disabled={isLoading}
+              >
+                <UserPlus className="mr-2 h-4 w-4" />
+                Abra sua conta
               </Button>
 
               <div className="text-center text-xs text-gray-500 mt-4 p-3 bg-blue-50 rounded-md">
                 <p className="font-medium">💡 Protótipo de Demonstração</p>
-                <p className="mt-1">Use qualquer método de autenticação para acessar</p>
+                <p className="mt-1">Use qualquer CPF e senha para acessar</p>
               </div>
             </form>
           </CardContent>
