@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 import { Login } from '@/components/Login';
+import { Landing } from '@/pages/Landing';
 import { Layout } from '@/components/Layout';
 import { Dashboard } from '@/pages/Dashboard';
 import { Accounts } from '@/pages/Accounts';
@@ -10,7 +11,37 @@ import './App.css';
 
 function AppContent() {
   const { isAuthenticated, isLoading } = useAuth();
-  const [currentPage, setCurrentPage] = useState('dashboard');
+  const [currentPage, setCurrentPage] = useState('landing');
+  const [showLogin, setShowLogin] = useState(false);
+
+  // Detecta navegação para /login
+  useEffect(() => {
+    const handleNavigation = () => {
+      if (window.location.pathname === '/login') {
+        setShowLogin(true);
+        setCurrentPage('login');
+      } else if (window.location.pathname === '/') {
+        setShowLogin(false);
+        setCurrentPage('landing');
+      }
+    };
+
+    handleNavigation();
+    window.addEventListener('popstate', handleNavigation);
+    return () => window.removeEventListener('popstate', handleNavigation);
+  }, []);
+
+  // Função para navegar para login
+  const navigateToLogin = () => {
+    window.history.pushState({}, '', '/login');
+    setShowLogin(true);
+    setCurrentPage('login');
+  };
+
+  // Expor função globalmente para Landing page
+  useEffect(() => {
+    (window as any).navigateToLogin = navigateToLogin;
+  }, []);
 
   if (isLoading) {
     return (
@@ -21,6 +52,11 @@ function AppContent() {
         </div>
       </div>
     );
+  }
+
+  // Mostrar landing page se não estiver autenticado e não estiver na página de login
+  if (!isAuthenticated && !showLogin) {
+    return <Landing />;
   }
 
   if (!isAuthenticated) {
