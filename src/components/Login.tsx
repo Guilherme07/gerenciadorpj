@@ -4,7 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Fingerprint, KeyRound, UserPlus } from 'lucide-react';
+import { Fingerprint, KeyRound, UserPlus, QrCode, ChevronDown, ChevronUp } from 'lucide-react';
+import { QRCodeSVG } from 'qrcode.react';
 
 export const Login: React.FC = () => {
   const [cpf, setCpf] = useState('');
@@ -12,7 +13,11 @@ export const Login: React.FC = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [biometricAvailable, setBiometricAvailable] = useState(false);
+  const [showCPFLogin, setShowCPFLogin] = useState(false);
   const { login } = useAuth();
+
+  // URL para o QR Code (pode ser customizada)
+  const qrCodeValue = 'https://caixa.gov.br/empresa/login/qrcode/12345';
 
   useEffect(() => {
     // Verifica se a API de autenticação Web está disponível
@@ -87,6 +92,23 @@ export const Login: React.FC = () => {
     }
   };
 
+  const handleQRCodeLogin = async () => {
+    setError('');
+    setIsLoading(true);
+
+    try {
+      // Simulação de autenticação via QR Code
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simula sucesso do QR Code
+      await login('qrcode@user.com', 'qrcode');
+    } catch (err) {
+      setError('Falha na autenticação via QR Code. Tente outro método.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleOpenAccount = () => {
     // Em produção, isso redirecionaria para a página de abertura de conta
     alert('Redirecionando para abertura de conta PJ...\n\nEm produção, isso abriria o formulário de cadastro de nova empresa.');
@@ -110,6 +132,24 @@ export const Login: React.FC = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
+            {/* QR Code Login */}
+            <div className="space-y-4">
+              <div className="flex flex-col items-center justify-center bg-white p-6 rounded-lg border-2 border-blue-200">
+                <QRCodeSVG 
+                  value={qrCodeValue}
+                  size={200}
+                  level="H"
+                  includeMargin={true}
+                />
+                <p className="text-sm text-gray-700 font-medium mt-4 text-center">
+                  Escaneie o QR Code com seu APP Caixa
+                </p>
+                <p className="text-xs text-gray-500 mt-2 text-center">
+                  Abra o aplicativo CAIXA no seu celular e use a câmera para escanear
+                </p>
+              </div>
+            </div>
+
             {/* Autenticação Biométrica */}
             {biometricAvailable && (
               <div className="space-y-3">
@@ -129,74 +169,95 @@ export const Login: React.FC = () => {
               </div>
             )}
 
-            {/* Login Tradicional */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="cpf">CPF</Label>
-                <Input
-                  id="cpf"
-                  type="text"
-                  placeholder="000.000.000-00"
-                  value={cpf}
-                  onChange={handleCPFChange}
-                  maxLength={14}
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="password">Senha</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  disabled={isLoading}
-                />
-              </div>
-
-              <div className="flex items-center justify-between text-sm">
-                <a href="#" className="text-blue-600 hover:underline">
-                  Esqueci minha senha
-                </a>
-                <a href="#" className="text-blue-600 hover:underline">
-                  Primeiro acesso
-                </a>
-              </div>
-
-              {error && (
-                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
-                  {error}
-                </div>
-              )}
-
-              <Button
-                type="submit"
-                className="w-full h-12 bg-blue-900 hover:bg-blue-800"
-                disabled={isLoading}
-              >
-                <KeyRound className="mr-2 h-4 w-4" />
-                {isLoading ? 'Entrando...' : 'Entrar'}
-              </Button>
-
+            {/* Botão para mostrar/ocultar login com CPF */}
+            <div>
               <Button
                 type="button"
-                className="w-full h-12 bg-orange-500 hover:bg-orange-600 text-white"
-                onClick={handleOpenAccount}
-                disabled={isLoading}
+                variant="outline"
+                className="w-full h-12 border-2 border-gray-300 hover:border-blue-400 hover:bg-gray-50"
+                onClick={() => setShowCPFLogin(!showCPFLogin)}
               >
-                <UserPlus className="mr-2 h-4 w-4" />
-                Abra sua conta
+                <KeyRound className="mr-2 h-5 w-5" />
+                Entrar com CPF e Senha
+                {showCPFLogin ? (
+                  <ChevronUp className="ml-auto h-5 w-5" />
+                ) : (
+                  <ChevronDown className="ml-auto h-5 w-5" />
+                )}
               </Button>
+            </div>
 
-              <div className="text-center text-xs text-gray-500 mt-4 p-3 bg-blue-50 rounded-md">
-                <p className="font-medium">💡 Protótipo de Demonstração</p>
-                <p className="mt-1">Use qualquer CPF e senha para acessar</p>
-              </div>
-            </form>
+            {/* Login com CPF e Senha (Colapsável) */}
+            {showCPFLogin && (
+              <form onSubmit={handleSubmit} className="space-y-4 animate-in slide-in-from-top-2">
+                <div className="space-y-2">
+                  <Label htmlFor="cpf">CPF</Label>
+                  <Input
+                    id="cpf"
+                    type="text"
+                    placeholder="000.000.000-00"
+                    value={cpf}
+                    onChange={handleCPFChange}
+                    maxLength={14}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="password">Senha</Label>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+
+                <div className="flex items-center justify-between text-sm">
+                  <a href="#" className="text-blue-600 hover:underline">
+                    Esqueci minha senha
+                  </a>
+                  <a href="#" className="text-blue-600 hover:underline">
+                    Primeiro acesso
+                  </a>
+                </div>
+
+                {error && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md text-sm">
+                    {error}
+                  </div>
+                )}
+
+                <Button
+                  type="submit"
+                  className="w-full h-12 bg-blue-900 hover:bg-blue-800"
+                  disabled={isLoading}
+                >
+                  <KeyRound className="mr-2 h-4 w-4" />
+                  {isLoading ? 'Entrando...' : 'Entrar'}
+                </Button>
+              </form>
+            )}
+
+            {/* Botão Abra sua conta */}
+            <Button
+              type="button"
+              className="w-full h-12 bg-orange-500 hover:bg-orange-600 text-white"
+              onClick={handleOpenAccount}
+              disabled={isLoading}
+            >
+              <UserPlus className="mr-2 h-4 w-4" />
+              Abra sua conta
+            </Button>
+
+            <div className="text-center text-xs text-gray-500 mt-4 p-3 bg-blue-50 rounded-md">
+              <p className="font-medium">💡 Protótipo de Demonstração</p>
+              <p className="mt-1">Use qualquer método de autenticação para acessar</p>
+            </div>
           </CardContent>
         </Card>
 
