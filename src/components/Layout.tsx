@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { FAB } from '@/components/FAB';
 import {
   LayoutDashboard,
   Wallet,
@@ -285,6 +286,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
           {children}
         </main>
       </div>
+
+      {/* Floating Action Button */}
+      <FAB />
     </div>
   );
 };

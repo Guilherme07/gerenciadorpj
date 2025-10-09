@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { FAB } from '@/components/FAB';
 import { Fingerprint, KeyRound, UserPlus, QrCode, ChevronDown, ChevronUp } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
 
@@ -265,6 +266,9 @@ export const Login: React.FC = () => {
           <p>© 2025 CAIXA Econômica Federal - Todos os direitos reservados</p>
         </div>
       </div>
+
+      {/* Floating Action Button */}
+      <FAB />
     </div>
   );
 };

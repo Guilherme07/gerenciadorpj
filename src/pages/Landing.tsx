@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { FAB } from '@/components/FAB';
 import { 
   Building2, 
   TrendingUp, 
@@ -15,6 +16,22 @@ import {
 } from 'lucide-react';
 
 export const Landing: React.FC = () => {
+  const [showStickyButton, setShowStickyButton] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (buttonRef.current) {
+        const buttonRect = buttonRef.current.getBoundingClientRect();
+        // Mostrar sticky header quando o botão original sair da tela
+        setShowStickyButton(buttonRect.bottom < 0);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const navigateToLogin = () => {
     if ((window as any).navigateToLogin) {
       (window as any).navigateToLogin();
@@ -87,6 +104,27 @@ export const Landing: React.FC = () => {
         </div>
       </header>
 
+      {/* Sticky Header - Aparece ao fazer scroll */}
+      <div 
+        className={`fixed top-0 left-0 right-0 z-40 bg-blue-900 text-white shadow-lg transition-transform duration-300 ${
+          showStickyButton ? 'translate-y-0' : '-translate-y-full'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Building2 className="h-6 w-6" />
+            <span className="font-bold text-lg">CAIXA Empresas</span>
+          </div>
+          <Button 
+            onClick={navigateToLogin}
+            className="bg-white text-blue-900 hover:bg-gray-100"
+          >
+            Abrir Conta PJ
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-20">
         <div className="container mx-auto px-4">
@@ -107,6 +145,7 @@ export const Landing: React.FC = () => {
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
               <Button 
+                ref={buttonRef}
                 size="lg"
                 variant="outline"
                 className="bg-white/10 hover:bg-white/20 text-white border-white text-lg h-14 px-8"
@@ -271,6 +310,9 @@ export const Landing: React.FC = () => {
           </div>
         </div>
       </footer>
+
+      {/* Floating Action Button */}
+      <FAB />
     </div>
   );
 };
