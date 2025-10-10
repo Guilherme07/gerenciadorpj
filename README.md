@@ -1,191 +1,164 @@
-# 🏦 Sistema Gerenciador Financeiro PJ - CAIXA
+# 🏦 Gerenciador Financeiro PJ - CAIXA
 
-Sistema web completo de gerenciamento financeiro para pessoas jurídicas do banco CAIXA.
+Sistema de gerenciamento financeiro para pessoas jurídicas da CAIXA Econômica Federal.
 
----
+![React](https://img.shields.io/badge/React-18-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
+![Vite](https://img.shields.io/badge/Vite-6-purple)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-cyan)
+
+## 📋 Sobre o Projeto
+
+Protótipo funcional de um sistema web moderno para gerenciamento financeiro corporativo, desenvolvido com as melhores práticas e tecnologias atuais.
+
+### ✨ Funcionalidades Principais
+
+- 🔐 **Autenticação Múltipla**: QR Code, Biometria, CPF/Senha
+- 👤 **Perfis de Acesso**: Geral, Filial Sul, Criar novo perfil
+- 📊 **Dashboard Completo**: Visão consolidada das finanças
+- 💰 **Gestão de Contas**: Múltiplas contas bancárias
+- 💸 **Transações**: Histórico completo com filtros avançados
+- 💳 **Pagamentos**: 4 métodos (Código de barras, PIX Copia e Cola, PIX QR Code, Digitação manual)
+- 📄 **Notas Fiscais**: Recebidas, Emitidas, Pendentes
+- 📈 **Relatórios**: Financeiro, Análises, Fiscal, Personalizados
+- 🌐 **Status Jornada**: FAB button em todas as telas
 
 ## 🚀 Stack Tecnológica
 
-- **React 18** - Biblioteca JavaScript moderna
+### Frontend
+- **React 18** - Biblioteca JavaScript para interfaces
+- **TypeScript** - Tipagem estática
 - **Vite** - Build tool ultrarrápido
-- **TypeScript** - Tipagem estática e segurança
 - **Tailwind CSS** - Framework CSS utility-first
-- **Shadcn/ui** - Componentes acessíveis e customizáveis
-- **Recharts** - Biblioteca de gráficos interativos
+- **Shadcn/ui** - Componentes React acessíveis e customizáveis
+- **Recharts** - Biblioteca de gráficos
+- **Lucide React** - Ícones modernos
+- **QRCode.react** - Geração de QR Codes
 
----
+### Ferramentas
+- **pnpm** - Gerenciador de pacotes
+- **ESLint** - Linter JavaScript/TypeScript
+- **PostCSS** - Processador CSS
 
-## 📋 Pré-requisitos
+## 📦 Instalação
 
-Antes de começar, certifique-se de ter instalado:
+### Pré-requisitos
+- Node.js 18+
+- pnpm (ou npm/yarn)
 
-- **Node.js** 18+ ([Download](https://nodejs.org/))
-- **pnpm** (recomendado) ou npm/yarn
+### Passos
 
-### Instalar pnpm (se não tiver):
-
+1. Clone o repositório:
 ```bash
-npm install -g pnpm
+git clone https://github.com/Guilherme07/gerenciadorpj.git
+cd gerenciadorpj
 ```
 
----
-
-## ⚙️ Instalação e Execução
-
-### 1. Extrair o arquivo ZIP
-
-Extraia o conteúdo do arquivo `caixa-pj-financeiro-source.zip` em uma pasta de sua preferência.
-
-### 2. Instalar dependências
-
-Abra o terminal na pasta do projeto e execute:
-
+2. Instale as dependências:
 ```bash
 pnpm install
 ```
 
-Ou se preferir usar npm:
-
-```bash
-npm install
-```
-
-### 3. Executar em modo desenvolvimento
-
+3. Execute o servidor de desenvolvimento:
 ```bash
 pnpm run dev
 ```
 
-Ou com npm:
+4. Acesse: http://localhost:5173
 
-```bash
-npm run dev
-```
-
-O sistema estará disponível em: **http://localhost:5173**
-
-### 4. Build para produção
+## 🏗️ Build para Produção
 
 ```bash
 pnpm run build
 ```
 
-Os arquivos otimizados serão gerados na pasta `dist/`
+Os arquivos otimizados estarão em `dist/`.
 
-### 5. Preview da build de produção
-
-```bash
-pnpm run preview
-```
-
----
-
-## 📂 Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 caixa-pj-financeiro/
-├── public/                      # Arquivos públicos estáticos
-│   └── login-demo.html         # Página demo de login standalone
 ├── src/
-│   ├── components/             # Componentes React
-│   │   ├── ui/                # Componentes Shadcn/ui
-│   │   ├── Layout.tsx         # Layout principal com sidebar
-│   │   └── Login.tsx          # Componente de login
-│   ├── contexts/              # React Context
-│   │   └── AuthContext.tsx    # Context de autenticação
-│   ├── pages/                 # Páginas do sistema
-│   │   ├── Landing.tsx        # Página inicial (landing page)
-│   │   ├── Dashboard.tsx      # Dashboard principal
-│   │   ├── Accounts.tsx       # Gestão de contas
-│   │   ├── Transactions.tsx   # Transações
-│   │   └── ReportsFinancial.tsx # Relatórios financeiros
-│   ├── services/              # Serviços e dados mock
-│   │   └── mockData.ts        # Dados mockados
-│   ├── types/                 # Interfaces TypeScript
-│   │   └── index.ts           # Definições de tipos
-│   ├── App.tsx                # Componente raiz
-│   ├── App.css                # Estilos globais
-│   ├── main.tsx               # Entry point
-│   └── index.css              # Imports do Tailwind
-├── components.json            # Configuração Shadcn/ui
-├── tsconfig.json              # Configuração TypeScript
-├── tailwind.config.js         # Configuração Tailwind
-├── vite.config.ts             # Configuração Vite
-├── package.json               # Dependências
-└── README.md                  # Este arquivo
+│   ├── components/       # Componentes reutilizáveis
+│   │   ├── ui/          # Componentes Shadcn/ui
+│   │   ├── FAB.tsx      # Floating Action Button
+│   │   ├── Layout.tsx   # Layout principal
+│   │   ├── Login.tsx    # Tela de login
+│   │   └── ProfileSelector.tsx
+│   ├── contexts/        # Contextos React
+│   │   └── AuthContext.tsx
+│   ├── pages/           # Páginas do sistema
+│   │   ├── Dashboard.tsx
+│   │   ├── Accounts.tsx
+│   │   ├── Transactions.tsx
+│   │   ├── PaymentsMake.tsx
+│   │   ├── Landing.tsx
+│   │   └── ReportsFinancial.tsx
+│   ├── services/        # Serviços e dados mock
+│   │   └── mockData.ts
+│   ├── types/           # Tipos TypeScript
+│   │   └── index.ts
+│   ├── App.tsx          # Componente principal
+│   └── main.tsx         # Entry point
+├── public/              # Arquivos estáticos
+├── dist/                # Build de produção
+└── package.json
 ```
 
----
+## 🎨 Funcionalidades Detalhadas
 
-## 🎯 Funcionalidades
+### 🔐 Autenticação
+- **QR Code**: Escaneie com o app CAIXA
+- **Biometria**: Face ID, Touch ID, Windows Hello
+- **CPF e Senha**: Login tradicional
+- **Abrir Conta PJ**: Cadastro de nova empresa
 
-### ✅ Página Landing Inicial
-- Hero section com call-to-actions
-- Cards de funcionalidades
-- Seção de benefícios
-- Estatísticas
-- Footer completo
+### 💳 Realizar Pagamentos
+1. **Código de Barras**
+   - Digitação manual
+   - Leitura por leitora
+   - Upload de boleto (PDF/imagem)
 
-### ✅ Autenticação
-- Login com CPF e senha
-- Máscara automática no CPF
-- Autenticação biométrica (se disponível)
-- Botão "Abra sua conta"
+2. **PIX Copia e Cola**
+   - Campo de texto
+   - Botão "Colar" integrado
 
-### ✅ Dashboard
-- 4 cards de resumo financeiro
-- Gráfico de receitas vs despesas
-- Gráfico de distribuição de saldo
+3. **PIX QR Code**
+   - Upload de imagem
+   - Leitura por câmera
+
+4. **Digitação Manual**
+   - 10 tipos de pagamento
+   - Formulários dinâmicos
+
+### 📊 Dashboard
+- Cards de resumo financeiro
+- Gráficos interativos (Receitas vs Despesas)
+- Distribuição de saldo por conta
 - Transações recentes
 - Alertas e pendências
 
-### ✅ Gestão de Contas
+### 💰 Contas
 - Saldo total consolidado
-- 3 contas bancárias
-- Botão ocultar saldos
-- Informações detalhadas
+- Múltiplas contas (Corrente, Poupança, Investimento)
+- Botão "Ocultar Saldos"
+- Informações de segurança
 
-### ✅ Transações
+### 💸 Transações
 - Filtros avançados (busca, tipo, status)
 - Totais dinâmicos
 - Tabela completa
-- 8 transações mockadas
+- Indicadores visuais
 
-### ✅ Sistema de Navegação
-- Menu hierárquico com submenus
-- Notas Fiscais (3 submenus)
-- Relatórios (4 submenus)
-- Navegação intuitiva
+## 🎯 Credenciais de Teste
 
----
-
-## 🔐 Credenciais de Teste
-
-**Para fazer login, use:**
-- **CPF**: Qualquer CPF (ex: 123.456.789-00)
+Para acessar o sistema em modo de demonstração:
+- **CPF**: Qualquer CPF válido (ex: 123.456.789-00)
 - **Senha**: Qualquer senha
+- **QR Code**: Funcional (pode ser escaneado)
+- **Biometria**: Simulada (funciona se disponível no dispositivo)
 
-O sistema aceita qualquer CPF e senha para demonstração.
-
----
-
-## 🎨 Personalização
-
-### Cores
-
-As cores principais estão definidas no Tailwind CSS:
-- **Azul CAIXA**: `blue-900` (#1e3a8a)
-- **Laranja**: `orange-500` (#f97316)
-
-Para alterar, edite `tailwind.config.js`
-
-### Componentes
-
-Os componentes Shadcn/ui estão em `src/components/ui/` e podem ser personalizados individualmente.
-
----
-
-## 📦 Scripts Disponíveis
+## 🔧 Scripts Disponíveis
 
 ```bash
 # Desenvolvimento
@@ -194,145 +167,79 @@ pnpm run dev
 # Build de produção
 pnpm run build
 
-# Preview da build
+# Preview do build
 pnpm run preview
 
-# Lint (se configurado)
+# Lint
 pnpm run lint
 ```
 
----
+## 🌐 Deploy
 
-## 🔧 Configuração de Ambiente
+O projeto está configurado para deploy em:
+- Vercel
+- Netlify
+- GitHub Pages
+- Qualquer servidor estático
 
-O projeto não requer variáveis de ambiente para execução local, pois usa dados mockados.
+## 📝 Roadmap
 
-Para integração com backend real, crie um arquivo `.env`:
+### ✅ Implementado
+- [x] Landing page institucional
+- [x] Sistema de autenticação
+- [x] Seleção de perfis
+- [x] Dashboard completo
+- [x] Gestão de contas
+- [x] Transações com filtros
+- [x] Realizar pagamentos (4 métodos)
+- [x] FAB "Status Jornada"
+- [x] Sticky header na landing
 
-```env
-VITE_API_URL=https://sua-api.com
-VITE_API_KEY=sua-chave-api
-```
+### 🔄 Em Desenvolvimento
+- [ ] Consultar pagamentos
+- [ ] Pagamentos pendentes
+- [ ] Pagamentos via arquivo
+- [ ] Acessar DDA
+- [ ] Gerenciar limites
+- [ ] Notas fiscais (todas as seções)
+- [ ] Relatórios (Análises, Fiscal, Personalizados)
 
-E acesse via `import.meta.env.VITE_API_URL`
+### 🎯 Futuro
+- [ ] Integração com backend real
+- [ ] APIs de pagamento
+- [ ] Notificações em tempo real
+- [ ] Exportação de relatórios (PDF, Excel)
+- [ ] Modo escuro
+- [ ] Aplicativo mobile (React Native)
 
----
+## 🤝 Contribuindo
 
-## 🚀 Deploy
+Contribuições são bem-vindas! Por favor:
 
-### Vercel (Recomendado)
-
-1. Instale a CLI da Vercel:
-```bash
-npm i -g vercel
-```
-
-2. Execute na pasta do projeto:
-```bash
-vercel
-```
-
-### Netlify
-
-1. Instale a CLI do Netlify:
-```bash
-npm i -g netlify-cli
-```
-
-2. Execute:
-```bash
-netlify deploy --prod
-```
-
-### Build manual
-
-```bash
-pnpm run build
-```
-
-Faça upload da pasta `dist/` para qualquer servidor web ou CDN.
-
----
-
-## 🐛 Solução de Problemas
-
-### Erro ao instalar dependências
-
-```bash
-# Limpar cache e reinstalar
-rm -rf node_modules package-lock.json
-pnpm install
-```
-
-### Porta 5173 já em uso
-
-```bash
-# Especificar outra porta
-pnpm run dev -- --port 3000
-```
-
-### Erro de TypeScript
-
-```bash
-# Verificar versão do Node.js
-node --version  # Deve ser 18+
-
-# Reinstalar TypeScript
-pnpm add -D typescript
-```
-
----
-
-## 📚 Documentação Adicional
-
-- [React](https://react.dev/)
-- [Vite](https://vitejs.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn/ui](https://ui.shadcn.com/)
-- [Recharts](https://recharts.org/)
-
----
-
-## 🤝 Suporte
-
-Para dúvidas ou problemas:
-- Verifique a seção de Solução de Problemas acima
-- Consulte a documentação das tecnologias utilizadas
-- Entre em contato com o desenvolvedor
-
----
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
+5. Abra um Pull Request
 
 ## 📄 Licença
 
-© 2025 CAIXA Econômica Federal - Todos os direitos reservados
+Este projeto é um protótipo desenvolvido para fins de demonstração.
+
+## 👥 Autores
+
+- **Desenvolvimento**: Manus AI
+- **Design**: Baseado na identidade visual CAIXA
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões:
+- Abra uma [Issue](https://github.com/Guilherme07/gerenciadorpj/issues)
+- Entre em contato através do repositório
 
 ---
 
-## ✨ Próximos Passos
+**⚠️ Aviso**: Este é um protótipo funcional desenvolvido para demonstração. Não contém integração com sistemas reais da CAIXA e utiliza dados mockados.
 
-Para evoluir o sistema:
+**🎨 Desenvolvido com** ❤️ **usando React + TypeScript + Tailwind CSS**
 
-1. **Integrar com Backend Real**
-   - Substituir dados mockados por chamadas API
-   - Implementar autenticação JWT
-   - Conectar com banco de dados
-
-2. **Adicionar Testes**
-   - Unit tests com Vitest
-   - Component tests com Testing Library
-   - E2E tests com Playwright
-
-3. **Melhorias de Performance**
-   - Code splitting
-   - Lazy loading de rotas
-   - Service Workers (PWA)
-
-4. **Novas Funcionalidades**
-   - Exportação de relatórios (PDF, Excel)
-   - Upload de documentos
-   - Notificações em tempo real
-   - Chat de suporte
-
----
-
-**Desenvolvido com ❤️ usando React + TypeScript + Tailwind CSS + Shadcn/ui**
