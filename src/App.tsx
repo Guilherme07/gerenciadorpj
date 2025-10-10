@@ -12,6 +12,8 @@ import { PaymentsMake } from '@/pages/PaymentsMake';
 import { PaymentsConsult } from '@/pages/PaymentsConsult';
 import { PaymentsPending } from '@/pages/PaymentsPending';
 import { PaymentsFile } from '@/pages/PaymentsFile';
+import { PaymentsDDA } from '@/pages/PaymentsDDA';
+import { PaymentsLimits } from '@/pages/PaymentsLimits';
 import './App.css';
 
 function AppContent() {
@@ -143,19 +145,9 @@ function AppContent() {
       case 'payments-file':
         return <PaymentsFile />;
       case 'payments-dda':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Acessar DDA</h2>
-            <p className="text-gray-600">Débito Direto Autorizado - Página em desenvolvimento</p>
-          </div>
-        );
+        return <PaymentsDDA />;
       case 'payments-limits':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Gerenciar Limites</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
+        return <PaymentsLimits />;
       
       // Relatórios
       case 'reports':
