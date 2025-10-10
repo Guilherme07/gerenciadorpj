@@ -8,6 +8,7 @@ import { Dashboard } from '@/pages/Dashboard';
 import { Accounts } from '@/pages/Accounts';
 import { Transactions } from '@/pages/Transactions';
 import { ReportsFinancial } from '@/pages/ReportsFinancial';
+import { PaymentsMake } from '@/pages/PaymentsMake';
 import './App.css';
 
 function AppContent() {
@@ -130,24 +131,33 @@ function AppContent() {
       
       // Pagamentos
       case 'payments':
-      case 'payments-scheduled':
+      case 'payments-make':
+        return <PaymentsMake />;
+      case 'payments-consult':
         return (
           <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pagamentos Agendados</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Consultar Pagamentos</h2>
             <p className="text-gray-600">Página em desenvolvimento</p>
           </div>
         );
-      case 'payments-completed':
+      case 'payments-pending':
         return (
           <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pagamentos Concluídos</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pagamentos Pendentes</h2>
             <p className="text-gray-600">Página em desenvolvimento</p>
           </div>
         );
-      case 'payments-new':
+      case 'payments-file':
         return (
           <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Novo Pagamento</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pagamentos via Arquivo</h2>
+            <p className="text-gray-600">Página em desenvolvimento</p>
+          </div>
+        );
+      case 'payments-limits':
+        return (
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Gerenciar Limites</h2>
             <p className="text-gray-600">Página em desenvolvimento</p>
           </div>
         );
