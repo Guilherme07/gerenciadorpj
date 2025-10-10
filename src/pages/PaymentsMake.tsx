@@ -10,7 +10,8 @@ import {
   Edit3, 
   Upload,
   Camera,
-  Check
+  Check,
+  FileText
 } from 'lucide-react';
 
 type PaymentMethod = 'barcode' | 'pix-copy' | 'pix-qr' | 'manual' | null;
