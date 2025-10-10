@@ -9,6 +9,7 @@ import { Accounts } from '@/pages/Accounts';
 import { Transactions } from '@/pages/Transactions';
 import { ReportsFinancial } from '@/pages/ReportsFinancial';
 import { PaymentsMake } from '@/pages/PaymentsMake';
+import { PaymentsConsult } from '@/pages/PaymentsConsult';
 import './App.css';
 
 function AppContent() {
@@ -134,12 +135,7 @@ function AppContent() {
       case 'payments-make':
         return <PaymentsMake />;
       case 'payments-consult':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Consultar Pagamentos</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
+        return <PaymentsConsult />;
       case 'payments-pending':
         return (
           <div className="text-center py-20">

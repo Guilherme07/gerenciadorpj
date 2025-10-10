@@ -137,6 +137,40 @@ export const PaymentsMake: React.FC = () => {
                 <p className="font-medium mb-1">💡 Dica:</p>
                 <p>Você pode digitar, usar uma leitora de código de barras ou fazer upload do boleto em PDF/imagem.</p>
               </div>
+
+              {/* Meus Boletos DDA */}
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <h4 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Meus boletos DDA
+                </h4>
+                <div className="space-y-3">
+                  {[
+                    { id: 1, favorecido: 'Energia Elétrica - CEMIG', valor: 'R$ 1.245,80', vencimento: '15/10/2025', status: 'A vencer' },
+                    { id: 2, favorecido: 'Telefonia - Vivo Empresas', valor: 'R$ 890,50', vencimento: '18/10/2025', status: 'A vencer' },
+                    { id: 3, favorecido: 'Água e Esgoto - COPASA', valor: 'R$ 456,30', vencimento: '20/10/2025', status: 'A vencer' },
+                    { id: 4, favorecido: 'Internet - NET Empresarial', valor: 'R$ 680,00', vencimento: '22/10/2025', status: 'A vencer' },
+                  ].map((boleto) => (
+                    <div
+                      key={boleto.id}
+                      className="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-blue-500 hover:shadow-md transition-all cursor-pointer"
+                    >
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900">{boleto.favorecido}</p>
+                        <p className="text-sm text-gray-500 mt-1">
+                          Vencimento: {boleto.vencimento}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <p className="font-bold text-lg text-gray-900">{boleto.valor}</p>
+                        <span className="inline-block mt-1 px-2 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded">
+                          {boleto.status}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </CardContent>
           </Card>
         );
