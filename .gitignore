@@ -1,0 +1,31 @@
+# .gitignorenode_modules
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# Dependency directories
+.pnpm/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+
+# Others
+.env
+.env.local
+.env.*.local
+
+# Ignore lock files if using pnpm
+pnpm-lock.yaml
+
+# Ignore package-lock.json if using npm
+package-lock.json
