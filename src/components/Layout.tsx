@@ -80,6 +80,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
         { id: 'payments-consult', label: 'Consultar pagamentos', icon: Receipt },
         { id: 'payments-pending', label: 'Pagamentos pendentes', icon: Clock },
         { id: 'payments-file', label: 'Pagamentos via arquivo', icon: Upload },
+        { id: 'payments-dda', label: 'Acessar DDA', icon: FileText },
         { id: 'payments-limits', label: 'Gerenciar limites', icon: Settings },
       ]
     },

@@ -78,7 +78,7 @@ export const PaymentsMake: React.FC = () => {
                 Código de Barras
               </CardTitle>
               <CardDescription>
-                Digite o código de barras ou use uma leitora
+                Digite, escaneie ou faça upload do código de barras
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -98,6 +98,27 @@ export const PaymentsMake: React.FC = () => {
                 </p>
               </div>
 
+              <div className="space-y-2">
+                <Label htmlFor="barcode-upload">Ou faça upload do boleto</Label>
+                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors">
+                  <input
+                    id="barcode-upload"
+                    type="file"
+                    accept="image/*,.pdf"
+                    className="hidden"
+                  />
+                  <label htmlFor="barcode-upload" className="cursor-pointer">
+                    <Upload className="h-10 w-10 mx-auto text-gray-400 mb-2" />
+                    <p className="text-sm font-medium text-gray-700">
+                      Clique para fazer upload do boleto
+                    </p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      PNG, JPG ou PDF até 5MB
+                    </p>
+                  </label>
+                </div>
+              </div>
+
               <div className="flex gap-2">
                 <Button className="flex-1 bg-blue-900 hover:bg-blue-800">
                   <Camera className="mr-2 h-4 w-4" />
@@ -114,7 +135,7 @@ export const PaymentsMake: React.FC = () => {
 
               <div className="bg-blue-50 p-4 rounded-md text-sm text-gray-700">
                 <p className="font-medium mb-1">💡 Dica:</p>
-                <p>Você pode usar uma leitora de código de barras conectada ao computador para preencher automaticamente.</p>
+                <p>Você pode digitar, usar uma leitora de código de barras ou fazer upload do boleto em PDF/imagem.</p>
               </div>
             </CardContent>
           </Card>

@@ -154,6 +154,13 @@ function AppContent() {
             <p className="text-gray-600">Página em desenvolvimento</p>
           </div>
         );
+      case 'payments-dda':
+        return (
+          <div className="text-center py-20">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Acessar DDA</h2>
+            <p className="text-gray-600">Débito Direto Autorizado - Página em desenvolvimento</p>
+          </div>
+        );
       case 'payments-limits':
         return (
           <div className="text-center py-20">
