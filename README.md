@@ -1,180 +1,174 @@
 # 🏦 Gerenciador Financeiro PJ - CAIXA
 
-Sistema de gerenciamento financeiro para pessoas jurídicas da CAIXA Econômica Federal.
+Sistema completo de gerenciamento financeiro para pessoas jurídicas do banco CAIXA.
 
-![React](https://img.shields.io/badge/React-18-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![Vite](https://img.shields.io/badge/Vite-6-purple)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-cyan)
+## 🚀 Versão Atual: 2.0
 
-## 📋 Sobre o Projeto
+### ✨ Novidades desta Versão
 
-Protótipo funcional de um sistema web moderno para gerenciamento financeiro corporativo, desenvolvido com as melhores práticas e tecnologias atuais.
+#### **Menu Pagamentos Completo (6 Funcionalidades)**
 
-### ✨ Funcionalidades Principais
+1. **Realizar Pagamentos** 💳
+   - 4 métodos: Código de Barras, PIX Copia e Cola, PIX QR Code, Digitação Manual
+   - Upload de boletos (PDF/Imagem)
+   - Meus Boletos DDA integrado
+   - Leitura por máquina leitora
 
-- 🔐 **Autenticação Múltipla**: QR Code, Biometria, CPF/Senha
-- 👤 **Perfis de Acesso**: Geral, Filial Sul, Criar novo perfil
-- 📊 **Dashboard Completo**: Visão consolidada das finanças
-- 💰 **Gestão de Contas**: Múltiplas contas bancárias
-- 💸 **Transações**: Histórico completo com filtros avançados
-- 💳 **Pagamentos**: 4 métodos (Código de barras, PIX Copia e Cola, PIX QR Code, Digitação manual)
-- 📄 **Notas Fiscais**: Recebidas, Emitidas, Pendentes
-- 📈 **Relatórios**: Financeiro, Análises, Fiscal, Personalizados
-- 🌐 **Status Jornada**: FAB button em todas as telas
+2. **Consultar Pagamentos** 🔍
+   - Lista de transações com filtros avançados
+   - Detalhes expandíveis
+   - Download de comprovantes
+   - Consulta de lotes
+   - Repetir transação
+   - Seleção múltipla para impressão
 
-## 🚀 Stack Tecnológica
+3. **Pagamentos Pendentes** ⏰
+   - Transações iniciadas por outros usuários
+   - Pagamentos em lote não concluídos
+   - Ações: Concluir, Cancelar, Editar
+   - Seleção múltipla
+   - Filtros por favorecido, valor, data
 
-### Frontend
-- **React 18** - Biblioteca JavaScript para interfaces
-- **TypeScript** - Tipagem estática
-- **Vite** - Build tool ultrarrápido
-- **Tailwind CSS** - Framework CSS utility-first
-- **Shadcn/ui** - Componentes React acessíveis e customizáveis
-- **Recharts** - Biblioteca de gráficos
-- **Lucide React** - Ícones modernos
-- **QRCode.react** - Geração de QR Codes
+4. **Pagamentos via Arquivo** 📤
+   - Seleção de convênio bancário
+   - Upload de arquivo CNAB 240/400
+   - Validação de layout
+   - Envio para processamento
+   - Consulta remessa/retorno
+   - Autorização de arquivos pendentes
+   - Timeline de acompanhamento
+   - Cancelamento com justificativa
+   - Download de comprovantes
 
-### Ferramentas
-- **pnpm** - Gerenciador de pacotes
-- **ESLint** - Linter JavaScript/TypeScript
-- **PostCSS** - Processador CSS
+5. **Acessar DDA** 📄
+   - Gerenciamento de adesão (Ativar/Desativar)
+   - Consulta de boletos disponíveis
+   - Pagamento individual ou múltiplo
+   - Histórico de pagamentos
+   - Filtros avançados
+   - Download de comprovantes
+   - Alertas de vencimento
+
+6. **Gerenciar Limites** ⚙️
+   - Visão consolidada de limites
+   - 5 tipos: TED/DOC, PIX, Boletos, Lote, Tributos
+   - Barras de progresso por consumo
+   - Solicitação de aumento/redução
+   - Histórico de solicitações
+   - Orientações e documentação
+
+---
+
+## 🎯 Funcionalidades Principais
+
+### **Autenticação Moderna**
+- 📱 QR Code (APP CAIXA)
+- 👆 Biometria (Face ID/Touch ID/Windows Hello)
+- 🔐 CPF e Senha
+
+### **Seleção de Perfil**
+- 🏢 Perfil Geral
+- 📍 Perfil Filial Sul
+- ➕ Criar Novo Perfil
+
+### **Dashboard Executivo**
+- 📊 4 cards de resumo financeiro
+- 📈 Gráficos interativos (Receitas vs Despesas)
+- 🥧 Distribuição de saldo por conta
+- 📋 Transações recentes
+- ⚠️ Alertas e pendências
+
+### **Gestão de Contas**
+- 💰 Saldo total consolidado
+- 🏦 3 tipos de conta (Corrente, Poupança, Investimento)
+- 👁️ Ocultar/Exibir saldos
+- 💡 Dicas de segurança
+
+### **Transações**
+- 🔍 Filtros avançados (busca, tipo, status)
+- 📊 Totais dinâmicos
+- 💳 8 transações mockadas
+- 🎨 Indicadores visuais
+
+### **Notas Fiscais**
+- 📄 3 submenus (Recebidas, Emitidas, Pendentes)
+
+### **Relatórios**
+- 📊 4 tipos (Financeiro, Análises, Fiscal, Personalizados)
+
+---
+
+## 🛠️ Stack Tecnológica
+
+- ⚛️ **React 18** - Framework JavaScript
+- ⚡ **Vite 6** - Build tool ultrarrápido
+- 📘 **TypeScript 5** - Tipagem estática
+- 🎨 **Tailwind CSS 3** - Framework CSS utility-first
+- 🎭 **Shadcn/ui** - Componentes React reutilizáveis
+- 📊 **Recharts** - Biblioteca de gráficos
+- 🔐 **QRCode.react** - Geração de QR Codes
+- 🎯 **Lucide React** - Ícones modernos
+
+---
 
 ## 📦 Instalação
 
-### Pré-requisitos
-- Node.js 18+
-- pnpm (ou npm/yarn)
-
-### Passos
-
-1. Clone o repositório:
 ```bash
+# Clone o repositório
 git clone https://github.com/Guilherme07/gerenciadorpj.git
 cd gerenciadorpj
-```
 
-2. Instale as dependências:
-```bash
+# Instale as dependências
 pnpm install
-```
+# ou
+npm install
 
-3. Execute o servidor de desenvolvimento:
-```bash
+# Execute o projeto
 pnpm run dev
+# ou
+npm run dev
 ```
 
-4. Acesse: http://localhost:5173
+Acesse: **http://localhost:5173**
 
-## 🏗️ Build para Produção
+---
 
-```bash
-pnpm run build
-```
+## 🎮 Como Usar
 
-Os arquivos otimizados estarão em `dist/`.
+### **1. Acesse a Landing Page**
+- Conheça as funcionalidades
+- Clique em "Acessar Gerenciador"
 
-## 📁 Estrutura do Projeto
+### **2. Faça Login**
+- **QR Code**: Escaneie com o APP CAIXA
+- **Biometria**: Use Face ID/Touch ID
+- **CPF e Senha**: Qualquer CPF e senha (demo)
 
-```
-caixa-pj-financeiro/
-├── src/
-│   ├── components/       # Componentes reutilizáveis
-│   │   ├── ui/          # Componentes Shadcn/ui
-│   │   ├── FAB.tsx      # Floating Action Button
-│   │   ├── Layout.tsx   # Layout principal
-│   │   ├── Login.tsx    # Tela de login
-│   │   └── ProfileSelector.tsx
-│   ├── contexts/        # Contextos React
-│   │   └── AuthContext.tsx
-│   ├── pages/           # Páginas do sistema
-│   │   ├── Dashboard.tsx
-│   │   ├── Accounts.tsx
-│   │   ├── Transactions.tsx
-│   │   ├── PaymentsMake.tsx
-│   │   ├── Landing.tsx
-│   │   └── ReportsFinancial.tsx
-│   ├── services/        # Serviços e dados mock
-│   │   └── mockData.ts
-│   ├── types/           # Tipos TypeScript
-│   │   └── index.ts
-│   ├── App.tsx          # Componente principal
-│   └── main.tsx         # Entry point
-├── public/              # Arquivos estáticos
-├── dist/                # Build de produção
-└── package.json
-```
+### **3. Selecione um Perfil**
+- Geral (visão consolidada)
+- Filial Sul (operações específicas)
+- Novo perfil (criar personalizado)
 
-## 🎨 Funcionalidades Detalhadas
+### **4. Explore o Sistema**
+- Dashboard com resumo financeiro
+- Menu lateral com todas as funcionalidades
+- FAB "Status Jornada" (canto inferior direito)
 
-### 🔐 Autenticação
-- **QR Code**: Escaneie com o app CAIXA
-- **Biometria**: Face ID, Touch ID, Windows Hello
-- **CPF e Senha**: Login tradicional
-- **Abrir Conta PJ**: Cadastro de nova empresa
+---
 
-### 💳 Realizar Pagamentos
-1. **Código de Barras**
-   - Digitação manual
-   - Leitura por leitora
-   - Upload de boleto (PDF/imagem)
+## 📊 Dados Mockados
 
-2. **PIX Copia e Cola**
-   - Campo de texto
-   - Botão "Colar" integrado
+Todos os dados são simulados para demonstração:
+- ✅ Transações bancárias
+- ✅ Boletos DDA
+- ✅ Limites de transação
+- ✅ Pagamentos pendentes
+- ✅ Arquivos CNAB
+- ✅ Comprovantes
 
-3. **PIX QR Code**
-   - Upload de imagem
-   - Leitura por câmera
+---
 
-4. **Digitação Manual**
-   - 10 tipos de pagamento
-   - Formulários dinâmicos
-
-### 📊 Dashboard
-- Cards de resumo financeiro
-- Gráficos interativos (Receitas vs Despesas)
-- Distribuição de saldo por conta
-- Transações recentes
-- Alertas e pendências
-
-### 💰 Contas
-- Saldo total consolidado
-- Múltiplas contas (Corrente, Poupança, Investimento)
-- Botão "Ocultar Saldos"
-- Informações de segurança
-
-### 💸 Transações
-- Filtros avançados (busca, tipo, status)
-- Totais dinâmicos
-- Tabela completa
-- Indicadores visuais
-
-## 🎯 Credenciais de Teste
-
-Para acessar o sistema em modo de demonstração:
-- **CPF**: Qualquer CPF válido (ex: 123.456.789-00)
-- **Senha**: Qualquer senha
-- **QR Code**: Funcional (pode ser escaneado)
-- **Biometria**: Simulada (funciona se disponível no dispositivo)
-
-## 🔧 Scripts Disponíveis
-
-```bash
-# Desenvolvimento
-pnpm run dev
-
-# Build de produção
-pnpm run build
-
-# Preview do build
-pnpm run preview
-
-# Lint
-pnpm run lint
-```
-
-## 🌐 Deploy
+## 🚀 Deploy
 
 O projeto está configurado para deploy em:
 - Vercel
@@ -182,64 +176,45 @@ O projeto está configurado para deploy em:
 - GitHub Pages
 - Qualquer servidor estático
 
-## 📝 Roadmap
+```bash
+# Build de produção
+pnpm run build
 
-### ✅ Implementado
-- [x] Landing page institucional
-- [x] Sistema de autenticação
-- [x] Seleção de perfis
-- [x] Dashboard completo
-- [x] Gestão de contas
-- [x] Transações com filtros
-- [x] Realizar pagamentos (4 métodos)
-- [x] FAB "Status Jornada"
-- [x] Sticky header na landing
-
-### 🔄 Em Desenvolvimento
-- [ ] Consultar pagamentos
-- [ ] Pagamentos pendentes
-- [ ] Pagamentos via arquivo
-- [ ] Acessar DDA
-- [ ] Gerenciar limites
-- [ ] Notas fiscais (todas as seções)
-- [ ] Relatórios (Análises, Fiscal, Personalizados)
-
-### 🎯 Futuro
-- [ ] Integração com backend real
-- [ ] APIs de pagamento
-- [ ] Notificações em tempo real
-- [ ] Exportação de relatórios (PDF, Excel)
-- [ ] Modo escuro
-- [ ] Aplicativo mobile (React Native)
-
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Por favor:
-
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/NovaFuncionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/NovaFuncionalidade`)
-5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto é um protótipo desenvolvido para fins de demonstração.
-
-## 👥 Autores
-
-- **Desenvolvimento**: Manus AI
-- **Design**: Baseado na identidade visual CAIXA
-
-## 📞 Suporte
-
-Para dúvidas ou sugestões:
-- Abra uma [Issue](https://github.com/Guilherme07/gerenciadorpj/issues)
-- Entre em contato através do repositório
+# Preview do build
+pnpm run preview
+```
 
 ---
 
-**⚠️ Aviso**: Este é um protótipo funcional desenvolvido para demonstração. Não contém integração com sistemas reais da CAIXA e utiliza dados mockados.
+## 🎯 Roadmap
 
-**🎨 Desenvolvido com** ❤️ **usando React + TypeScript + Tailwind CSS**
+### **Próximas Funcionalidades**
+- [ ] Integração com backend real
+- [ ] Autenticação OAuth 2.0
+- [ ] Notificações em tempo real
+- [ ] Exportação de relatórios (PDF/Excel)
+- [ ] Modo escuro
+- [ ] Aplicativo mobile (React Native)
+- [ ] Integração com Open Banking
+- [ ] Chatbot de atendimento
+- [ ] Análise preditiva com IA
 
+---
+
+## 📄 Licença
+
+Este é um projeto de demonstração desenvolvido para fins educacionais.
+
+---
+
+## 👨‍💻 Desenvolvido por
+
+**Manus AI** - Sistema de Gerenciamento Financeiro PJ CAIXA
+
+---
+
+## 📞 Suporte
+
+Para dúvidas ou sugestões, abra uma issue no GitHub.
+
+🔗 **Repositório**: https://github.com/Guilherme07/gerenciadorpj
