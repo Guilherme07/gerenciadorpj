@@ -10,6 +10,7 @@ import { Transactions } from '@/pages/Transactions';
 import { ReportsFinancial } from '@/pages/ReportsFinancial';
 import { PaymentsMake } from '@/pages/PaymentsMake';
 import { PaymentsConsult } from '@/pages/PaymentsConsult';
+import { PaymentsPending } from '@/pages/PaymentsPending';
 import './App.css';
 
 function AppContent() {
@@ -137,12 +138,7 @@ function AppContent() {
       case 'payments-consult':
         return <PaymentsConsult />;
       case 'payments-pending':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Pagamentos Pendentes</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
+        return <PaymentsPending />;
       case 'payments-file':
         return (
           <div className="text-center py-20">
