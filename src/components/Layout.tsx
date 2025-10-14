@@ -57,7 +57,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) => {
   const { user, logout } = useAuth();
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
-  const [expandedMenus, setExpandedMenus] = React.useState<string[]>(['reports']);
+  const [expandedMenus, setExpandedMenus] = React.useState<string[]>(['payments', 'reports']);
 
   const menuItems: MenuItem[] = [
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -223,7 +223,7 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
                       }
                     }}
                     className={`
-                      w-full flex items-center justify-between gap-3 px-4 py-3 rounded-lg
+                      w-full flex items-center gap-3 px-4 py-3 rounded-lg
                       transition-all duration-200
                       ${isActive
                         ? 'bg-blue-900 text-white shadow-md'
@@ -231,15 +231,13 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
                       }
                     `}
                   >
-                    <div className="flex items-center gap-3">
-                      <Icon className="h-5 w-5" />
-                      <span className="font-medium">{item.label}</span>
-                    </div>
+                    <Icon className="h-5 w-5 flex-shrink-0" />
+                    <span className="font-medium text-left flex-1">{item.label}</span>
                     {hasSubmenu && (
                       isExpanded ? (
-                        <ChevronDown className={`h-4 w-4 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                        <ChevronDown className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-500'}`} />
                       ) : (
-                        <ChevronRight className={`h-4 w-4 ${isActive ? 'text-white' : 'text-gray-500'}`} />
+                        <ChevronRight className={`h-4 w-4 flex-shrink-0 ${isActive ? 'text-white' : 'text-gray-500'}`} />
                       )
                     )}
                   </button>
@@ -267,8 +265,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
                               }
                             `}
                           >
-                            <SubIcon className="h-4 w-4" />
-                            <span className="font-medium">{subItem.label}</span>
+                            <SubIcon className="h-4 w-4 flex-shrink-0" />
+                            <span className="font-medium text-left flex-1">{subItem.label}</span>
                           </button>
                         );
                       })}
