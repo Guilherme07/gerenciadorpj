@@ -6,6 +6,7 @@ export interface User {
   email: string;
   role: 'admin' | 'manager' | 'viewer';
   company: string;
+  loginType?: 'cpf' | 'biometry';
 }
 
 export interface Company {

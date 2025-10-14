@@ -231,8 +231,11 @@ export const authService = {
   login: async (email: string, password: string): Promise<{ user: User; token: string }> => {
     await delay();
     if (email && password) {
+      // Detecta tipo de login: se contém @ é email, senão é CPF
+      const loginType = email.includes('@') ? 'biometry' : 'cpf';
+      
       return {
-        user: mockUser,
+        user: { ...mockUser, loginType },
         token: 'mock-jwt-token-' + Date.now()
       };
     }
