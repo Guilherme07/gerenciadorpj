@@ -14,6 +14,8 @@ import { PaymentsPending } from '@/pages/PaymentsPending';
 import { PaymentsFile } from '@/pages/PaymentsFile';
 import { PaymentsDDA } from '@/pages/PaymentsDDA';
 import { PaymentsLimits } from '@/pages/PaymentsLimits';
+import { PaymentsAutoDebit } from '@/pages/PaymentsAutoDebit';
+import { PaymentsAutoPix } from '@/pages/PaymentsAutoPix';
 import './App.css';
 
 function AppContent() {
@@ -148,6 +150,10 @@ function AppContent() {
         return <PaymentsDDA />;
       case 'payments-limits':
         return <PaymentsLimits />;
+      case 'payments-auto-debit':
+        return <PaymentsAutoDebit />;
+      case 'payments-auto-pix':
+        return <PaymentsAutoPix />;
       
       // Relatórios
       case 'reports':

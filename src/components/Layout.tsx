@@ -22,7 +22,9 @@ import {
   Clock,
   CheckCircle,
   DollarSign,
-  Receipt
+  Receipt,
+  Repeat,
+  Zap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -80,6 +82,8 @@ export const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigat
         { id: 'payments-consult', label: 'Consultar pagamentos', icon: Receipt },
         { id: 'payments-pending', label: 'Pagamentos pendentes', icon: Clock },
         { id: 'payments-file', label: 'Pagamentos via arquivo', icon: Upload },
+        { id: 'payments-auto-debit', label: 'Pagamentos via Débito Automático', icon: Repeat },
+        { id: 'payments-auto-pix', label: 'Pagamentos via PIX Automático', icon: Zap },
         { id: 'payments-dda', label: 'Acessar DDA', icon: FileText },
         { id: 'payments-limits', label: 'Gerenciar limites', icon: Settings },
       ]
