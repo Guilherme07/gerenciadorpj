@@ -8,6 +8,8 @@ import { Dashboard } from '@/pages/Dashboard';
 import { Accounts } from '@/pages/Accounts';
 import { Transactions } from '@/pages/Transactions';
 import { ReportsFinancial } from '@/pages/ReportsFinancial';
+
+// Pagamentos
 import { PaymentsMake } from '@/pages/PaymentsMake';
 import { PaymentsConsult } from '@/pages/PaymentsConsult';
 import { PaymentsPending } from '@/pages/PaymentsPending';
@@ -16,6 +18,61 @@ import { PaymentsDDA } from '@/pages/PaymentsDDA';
 import { PaymentsLimits } from '@/pages/PaymentsLimits';
 import { PaymentsAutoDebit } from '@/pages/PaymentsAutoDebit';
 import { PaymentsAutoPix } from '@/pages/PaymentsAutoPix';
+
+// Contas
+import { AccountsInfo } from '@/pages/AccountsInfo';
+import { AccountsAccess } from '@/pages/AccountsAccess';
+
+// Saldos e Extratos
+import { BalancesView } from '@/pages/BalancesView';
+import { StatementsView } from '@/pages/StatementsView';
+
+// Investimentos
+import { InvestmentsApply } from '@/pages/InvestmentsApply';
+import { InvestmentsPosition } from '@/pages/InvestmentsPosition';
+import { InvestmentsStatements } from '@/pages/InvestmentsStatements';
+
+// Transferências
+import { TransfersMake } from '@/pages/TransfersMake';
+import { TransfersConsult } from '@/pages/TransfersConsult';
+import { TransfersLimits } from '@/pages/TransfersLimits';
+
+// Empréstimos
+import { LoansMy } from '@/pages/LoansMy';
+import { LoansContract } from '@/pages/LoansContract';
+
+// Cartões
+import { CardsCredit } from '@/pages/CardsCredit';
+import { CardsDebit } from '@/pages/CardsDebit';
+
+// POS (Azulzinha e Maquinhas)
+import { PosSales } from '@/pages/PosSales';
+import { PosReceivables } from '@/pages/PosReceivables';
+import { PosAnticipation } from '@/pages/PosAnticipation';
+import { PosMachines } from '@/pages/PosMachines';
+import { PosReports } from '@/pages/PosReports';
+
+// Cobrança Bancária
+import { BillingIssue } from '@/pages/BillingIssue';
+import { BillingMy } from '@/pages/BillingMy';
+import { BillingReceived } from '@/pages/BillingReceived';
+import { BillingAgreements } from '@/pages/BillingAgreements';
+import { BillingReports } from '@/pages/BillingReports';
+
+// Empregador
+import { EmployerPayroll } from '@/pages/EmployerPayroll';
+import { EmployerFgts } from '@/pages/EmployerFgts';
+import { EmployerEmployees } from '@/pages/EmployerEmployees';
+import { EmployerBenefits } from '@/pages/EmployerBenefits';
+import { EmployerReports } from '@/pages/EmployerReports';
+
+// Configurações
+import { SettingsProfile } from '@/pages/SettingsProfile';
+import { SettingsSecurity } from '@/pages/SettingsSecurity';
+import { SettingsNotifications } from '@/pages/SettingsNotifications';
+import { SettingsAppearance } from '@/pages/SettingsAppearance';
+import { SettingsAccess } from '@/pages/SettingsAccess';
+
 import './App.css';
 
 function AppContent() {
@@ -106,35 +163,41 @@ function AppContent() {
     }
     
     switch (currentPage) {
+      // Meu CAIXA (Dashboard)
       case 'dashboard':
         return <Dashboard />;
+      
+      // Minhas Contas
       case 'accounts':
-        return <Accounts />;
-      case 'transactions':
-        return <Transactions />;
-      // Notas Fiscais
-      case 'invoices':
-      case 'invoices-received':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Notas Fiscais Recebidas</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
-      case 'invoices-issued':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Notas Fiscais Emitidas</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
-      case 'invoices-pending':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Notas Fiscais Pendentes</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
+      case 'accounts-info':
+        return <AccountsInfo />;
+      case 'accounts-access':
+        return <AccountsAccess />;
+      
+      // Saldos e Extratos
+      case 'balances':
+      case 'balances-view':
+        return <BalancesView />;
+      case 'statements-view':
+        return <StatementsView />;
+      
+      // Investimentos
+      case 'investments':
+      case 'investments-apply':
+        return <InvestmentsApply />;
+      case 'investments-position':
+        return <InvestmentsPosition />;
+      case 'investments-statements':
+        return <InvestmentsStatements />;
+      
+      // Transferências
+      case 'transfers':
+      case 'transfers-make':
+        return <TransfersMake />;
+      case 'transfers-consult':
+        return <TransfersConsult />;
+      case 'transfers-limits':
+        return <TransfersLimits />;
       
       // Pagamentos
       case 'payments':
@@ -155,38 +218,81 @@ function AppContent() {
       case 'payments-auto-pix':
         return <PaymentsAutoPix />;
       
-      // Relatórios
+      // Empréstimos
+      case 'loans':
+      case 'loans-my':
+        return <LoansMy />;
+      case 'loans-contract':
+        return <LoansContract />;
+      
+      // Cartões
+      case 'cards':
+      case 'cards-credit':
+        return <CardsCredit />;
+      case 'cards-debit':
+        return <CardsDebit />;
+      
+      // POS (Azulzinha e Maquinhas)
+      case 'pos':
+      case 'pos-sales':
+        return <PosSales />;
+      case 'pos-receivables':
+        return <PosReceivables />;
+      case 'pos-anticipation':
+        return <PosAnticipation />;
+      case 'pos-machines':
+        return <PosMachines />;
+      case 'pos-reports':
+        return <PosReports />;
+      
+      // Cobrança Bancária
+      case 'billing':
+      case 'billing-issue':
+        return <BillingIssue />;
+      case 'billing-my':
+        return <BillingMy />;
+      case 'billing-received':
+        return <BillingReceived />;
+      case 'billing-agreements':
+        return <BillingAgreements />;
+      case 'billing-reports':
+        return <BillingReports />;
+      
+      // Empregador
+      case 'employer':
+      case 'employer-payroll':
+        return <EmployerPayroll />;
+      case 'employer-fgts':
+        return <EmployerFgts />;
+      case 'employer-employees':
+        return <EmployerEmployees />;
+      case 'employer-benefits':
+        return <EmployerBenefits />;
+      case 'employer-reports':
+        return <EmployerReports />;
+      
+      // Configurações
+      case 'settings':
+      case 'settings-profile':
+        return <SettingsProfile />;
+      case 'settings-security':
+        return <SettingsSecurity />;
+      case 'settings-notifications':
+        return <SettingsNotifications />;
+      case 'settings-appearance':
+        return <SettingsAppearance />;
+      case 'settings-access':
+        return <SettingsAccess />;
+      
+      // Transações (mantido para compatibilidade)
+      case 'transactions':
+        return <Transactions />;
+      
+      // Relatórios (mantido para compatibilidade)
       case 'reports':
       case 'reports-financial':
         return <ReportsFinancial />;
-      case 'reports-analytics':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Relatórios de Análises</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
-      case 'reports-tax':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Relatórios Fiscais</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
-      case 'reports-custom':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Relatórios Personalizados</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
-      case 'settings':
-        return (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Configurações</h2>
-            <p className="text-gray-600">Página em desenvolvimento</p>
-          </div>
-        );
+      
       default:
         return <Dashboard />;
     }
@@ -208,3 +314,4 @@ function App() {
 }
 
 export default App;
+
